@@ -11,7 +11,7 @@ The goal of this repository is not to build random CRUD applications, but to lea
 | ✅      | CLI Calculator          | Java basics, methods, switch, loops, exceptions |
 | ✅      | CLI Todo                | Classes, objects, collections                   |
 | ✅      | Student Management      | OOP, ArrayList, CRUD, layered design            |
-| ⏳      | File Organizer          | Java NIO, filesystem                            |
+| 🚧      | File Organizer          | Java NIO, filesystem                            |
 | ⏳      | URL Checker             | HTTP Client, JSON                               |
 | ⏳      | Concurrent File Scanner | Threads, ExecutorService                        |
 | ⏳      | REST API                | Spring Boot, PostgreSQL                         |
