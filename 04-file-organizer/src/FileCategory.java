@@ -1,0 +1,3 @@
+public enum FileCategory {
+    IMAGES, DOCUMENTS, AUDIO, VIDEOS, CODE, ARCHIVES, OTHERS
+}
