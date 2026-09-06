@@ -16,6 +16,8 @@ public class FileConsole {
         System.out.println("===============");
         System.out.println("1. Check Folder Exist or Not");
         System.out.println("2. List Files");
+        System.out.println("3. Create Category Directories");
+        System.out.println("4. Organize Files");
         System.out.println("9. Exit");
     }
 
@@ -30,6 +32,12 @@ public class FileConsole {
             break;
             case 2:
                 handleListFiles();
+                break;
+            case 3:
+                handleCreateCategoryDirectory();
+                break;
+            case 4:
+                handleOrganizeFiles();
                 break;
             default:
                 System.out.println("Invalid option!");
@@ -65,5 +73,21 @@ public class FileConsole {
         }else{
             System.out.println("Invalid folder path!");
         }
+    }
+
+    public void handleCreateCategoryDirectory(){
+        scanner.nextLine();
+        System.out.println("Enter folder path: ");
+        String folderPath = scanner.nextLine();
+        Path folder = Paths.get(folderPath);
+        fileOrganizer.createCategoryDirectories(folder);
+    }
+
+    public void handleOrganizeFiles(){
+        scanner.nextLine();
+        System.out.println("Enter folder path: ");
+        String folderPath = scanner.nextLine();
+        Path folder = Paths.get(folderPath);
+        fileOrganizer.organizeFiles(folder);
     }
 }

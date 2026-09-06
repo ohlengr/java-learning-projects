@@ -1,11 +1,10 @@
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.nio.file.*;
+import java.sql.Array;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class FileOrganizer {
 
@@ -63,10 +62,10 @@ public class FileOrganizer {
                     list.add(prefix + entry.getFileName());
                 }
             }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+            return list;
+        }catch (IOException e){
+            throw new RuntimeException(e);
         }
-        return list;
     }
 
     public FileCategory getFileCategory(String fileName){
@@ -77,5 +76,68 @@ public class FileOrganizer {
         }else {
             return FileCategory.OTHERS;
         }
+    }
+
+    public void createCategoryDirectories(Path folderPath){
+        try {
+            FileCategory[] fileCategory = FileCategory.values();
+            for (FileCategory category : fileCategory ){
+                Path categoryDirectoryPath = folderPath.resolve(category.toString());
+                Files.createDirectories(categoryDirectoryPath);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void organizeFiles(Path folderPath){
+        List<Path> list = findFilesRecursively(folderPath);
+        for(Path path : list) {
+            FileCategory fileCategory = getFileCategory(path.getFileName().toString());
+            Path categoryPath = folderPath.resolve(fileCategory.toString());
+            try {
+                Files.createDirectories(categoryPath);
+                Path destinationPath = categoryPath.resolve(path.getFileName().toString());
+                Path uniqueDestinationPath = getUniqueDestination(destinationPath);
+                if(!uniqueDestinationPath.getParent().equals(categoryPath)){
+                    Files.move(path, uniqueDestinationPath);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public List<Path> findFilesRecursively(Path folderPath){
+        List<Path> list = new ArrayList<>();
+        try (Stream<Path> stream = Files.walk(folderPath)){
+            stream.filter(Files::isRegularFile).forEach(list::add);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    public Path getUniqueDestination(Path destinationPath){
+        Path parent = destinationPath.getParent();
+        String fileName = destinationPath.getFileName().toString();
+
+        int dotIndex = fileName.lastIndexOf(".");
+
+        String baseFile = fileName;
+        String extension = "";
+
+        if(dotIndex>0){
+            baseFile = fileName.substring(0,dotIndex);
+            extension = fileName.substring(dotIndex);
+        }
+
+        int count = 1;
+        while (Files.exists(destinationPath)) {
+            String newDestination = baseFile+"_"+count+extension;
+            destinationPath = parent.resolve(newDestination);
+            count++;
+        }
+        return destinationPath;
     }
 }
