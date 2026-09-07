@@ -11,7 +11,7 @@ public class Main {
         while (running) {
             fileConsole.menu();
             int option = fileConsole.readOption();
-            if(option==9){
+            if(option==5){
                 running = false;
             }
             fileConsole.performAction(option);

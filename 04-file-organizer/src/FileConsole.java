@@ -1,6 +1,9 @@
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class FileConsole {
@@ -18,7 +21,7 @@ public class FileConsole {
         System.out.println("2. List Files");
         System.out.println("3. Create Category Directories");
         System.out.println("4. Organize Files");
-        System.out.println("9. Exit");
+        System.out.println("5. Exit");
     }
 
     public int readOption(){
@@ -39,6 +42,9 @@ public class FileConsole {
             case 4:
                 handleOrganizeFiles();
                 break;
+            case 5:
+                System.out.println("Exit!");
+                break;
             default:
                 System.out.println("Invalid option!");
             break;
@@ -49,14 +55,11 @@ public class FileConsole {
         scanner.nextLine();
         System.out.println("Enter Folder Path:");
         String folderPath = scanner.nextLine();
-        int status = fileOrganizer.isValidDirectory(folderPath);
-        if(status==1){
-            System.out.println("Path exist!");
-            System.out.println("Path is directory!");
-        }else if(status==2){
-            System.out.println("Path exist!");
-        }else {
-            System.out.println("Path not exist!");
+        DirectoryStatus directoryStatus = fileOrganizer.isValidDirectory(folderPath);
+        switch (directoryStatus) {
+            case NOT_FOUND -> System.out.println("✗ Path does not exist");
+            case VALID_DIRECTORY -> System.out.println("✓ Valid directory");
+            case FILE_EXISTS -> System.out.println("✓ File directory");
         }
     }
 
@@ -64,14 +67,14 @@ public class FileConsole {
         scanner.nextLine();
         System.out.println("Enter folder path: ");
         String folderPath = scanner.nextLine();
-        int status = fileOrganizer.isValidDirectory(folderPath);
-        if(status == 1){
+        DirectoryStatus directoryStatus = fileOrganizer.isValidDirectory(folderPath);
+        if(directoryStatus == DirectoryStatus.VALID_DIRECTORY){
             List<String> fileList = fileOrganizer.listFolderFiles(Paths.get(folderPath));
             for(String file : fileList) {
                 System.out.println(file);
             }
         }else{
-            System.out.println("Invalid folder path!");
+            System.out.println("✗ Path is a file or it does not exist!");
         }
     }
 
@@ -88,6 +91,15 @@ public class FileConsole {
         System.out.println("Enter folder path: ");
         String folderPath = scanner.nextLine();
         Path folder = Paths.get(folderPath);
-        fileOrganizer.organizeFiles(folder);
+        Map<FileCategory, Integer> fileCategoryCount = fileOrganizer.organizeFiles(folder);
+        System.out.println("Moved:");
+        int totalMoved = 0;
+        for(Map.Entry<FileCategory, Integer> entry : fileCategoryCount.entrySet()) {
+            FileCategory category = entry.getKey();
+            int count = entry.getValue();
+            System.out.println(category + ": " + count);
+            totalMoved+=count;
+        }
+        System.out.println("Total file moved: " + totalMoved);
     }
 }

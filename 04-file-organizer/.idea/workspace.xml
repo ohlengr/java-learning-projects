@@ -2,11 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f1608ad-2731-4451-b1b6-ba487db5f6c3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DirectoryStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01 Java CLI Calculator/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../01 Java CLI Calculator/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01 Java CLI Calculator/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../01 Java CLI Calculator/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01 Java CLI Calculator/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../01 Java CLI Calculator/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01 Java CLI Calculator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../01 Java CLI Calculator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01 Java CLI Calculator/Java CLI Calculator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../01 Java CLI Calculator/Java CLI Calculator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../01 Java CLI Calculator/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../01 Java CLI Calculator/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02 Java Todo/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../02 Java Todo/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02 Java Todo/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../02 Java Todo/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02 Java Todo/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../02 Java Todo/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02 Java Todo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../02 Java Todo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02 Java Todo/Java Todo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../02 Java Todo/Java Todo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02 Java Todo/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../02 Java Todo/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02 Java Todo/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../02 Java Todo/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../02 Java Todo/src/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../02 Java Todo/src/Todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/Student Management.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/Student Management.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/out/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/out/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/out/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/out/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/out/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/out/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/out/.idea/out.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/out/.idea/out.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/src/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/src/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/src/StudentNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/src/StudentNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/src/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/src/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/src/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/src/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../03 Student Management/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../03 Student Management/students.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/04-file-organizer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/04-file-organizer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/04-file-organizer/FileConsole.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/04-file-organizer/FileConsole.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/04-file-organizer/FileOrganizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/04-file-organizer/FileOrganizer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FileConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileConsole.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FileOrganizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileOrganizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,25 +73,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/media/codaura-llp/CC08-86B0/Projects/java-tiny-projects/04-file-organizer",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/media/codaura-llp/CC08-86B0/Projects/java-tiny-projects/04-file-organizer&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-34e2839f716b-intellij.indexing.shared.core-IU-262.9437.185" />
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.9437.185" />
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10315.125" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10315.125" />
       </set>
     </attachedChunks>
   </component>

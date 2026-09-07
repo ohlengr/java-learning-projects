@@ -2,22 +2,27 @@
 
 A project-based Java learning journey from **Core Java** to **Spring Boot** through progressively challenging projects.
 
-The goal of this repository is not to build random CRUD applications, but to learn one new engineering concept in each project and gradually apply those skills to real-world products like **Vetigo** and **CodeIntel**.
+The goal of this repository is to learn one new engineering concept in each project and gradually build the skills required for production-ready backend development and larger products like **Vetigo** and **CodeIntel**.
+
+---
 
 ## Learning Roadmap
 
-| Status | Project                 | Focus                                           |
-| ------ | ----------------------- | ----------------------------------------------- |
-| ✅      | CLI Calculator          | Java basics, methods, switch, loops, exceptions |
-| ✅      | CLI Todo                | Classes, objects, collections                   |
-| ✅      | Student Management      | OOP, ArrayList, CRUD, layered design            |
-| 🚧      | File Organizer          | Java NIO, filesystem                            |
-| ⏳      | URL Checker             | HTTP Client, JSON                               |
-| ⏳      | Concurrent File Scanner | Threads, ExecutorService                        |
-| ⏳      | REST API                | Spring Boot, PostgreSQL                         |
-| ⏳      | Authentication API      | Spring Security, JWT                            |
-| ⏳      | Mini SaaS Backend       | Multi-tenant architecture                       |
-| ⏳      | Codebase Scanner        | Code analysis                                   |
+| Status | Project | Focus |
+|--------|---------|-------|
+| ✅ | CLI Calculator | Java basics, methods, loops, switch, exceptions |
+| ✅ | CLI Todo | Classes, objects, collections |
+| ✅ | Student Management | OOP, CRUD, `ArrayList`, layered architecture |
+| ✅ | File Organizer | Java NIO, Streams, recursive file handling |
+| ⏳ | URL Checker | HTTP Client, networking, response handling |
+| ⏳ | REST API | Spring Boot, REST fundamentals |
+| ⏳ | PostgreSQL CRUD API | Spring Boot, PostgreSQL, persistence |
+| ⏳ | Concurrent Worker System | Threads, ExecutorService, concurrency |
+| ⏳ | Authentication API | Spring Security, JWT |
+| ⏳ | Mini SaaS Backend | Multi-tenant architecture |
+| ⏳ | Codebase Scanner | Code analysis, large-scale file processing |
+
+---
 
 ## Repository Structure
 
@@ -28,11 +33,12 @@ java-learning-projects/
 ├── 03-student-management/
 ├── 04-file-organizer/
 ├── 05-url-checker/
-├── 06-concurrent-file-scanner/
-├── 07-rest-api/
-├── 08-authentication-api/
-├── 09-mini-saas-backend/
-└── 10-codebase-scanner/
+├── 06-rest-api/
+├── 07-postgresql-crud-api/
+├── 08-concurrent-worker-system/
+├── 09-authentication-api/
+├── 10-mini-saas-backend/
+└── 11-codebase-scanner/
 ```
 
 ## Tech Stack

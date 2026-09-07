@@ -1,244 +1,184 @@
 # Project 04 — File Organizer
 
-A console-based File Organizer built with Java to practice **Java NIO, file system operations, path handling, file categorization, and exception handling**.
+> **Status:** ✅ Completed
 
-The application takes a folder as input and organizes files into categorized directories based on their file extensions.
+A Java CLI application that automatically organizes files into category folders using Java NIO.
 
-## 🎯 Project Goal
+This project was built to practice real-world file system operations, recursive directory traversal, Java Streams, enums, collections, and clean application architecture.
 
-The goal of this project is to gain practical experience working with the Java file system APIs while gradually building a useful CLI application.
+---
 
-Example:
+## Features
+
+- Validate folder paths
+- List files and directories
+- Categorize files by extension
+- Create category folders automatically
+- Organize files recursively
+- Handle duplicate filenames safely
+- Skip files already in the correct category
+- Display organization summary after completion
+
+---
+
+## Categories
+
+The organizer currently supports:
+
+| Category | Extensions |
+|----------|------------|
+| IMAGES | `.jpg`, `.jpeg`, `.png`, `.gif` |
+| DOCUMENTS | `.pdf`, `.txt`, `.doc`, `.docx` |
+| AUDIO | `.mp3`, `.wav` |
+| VIDEOS | `.mp4`, `.mkv`, `.avi` |
+| CODE | `.java`, `.py`, `.js`, `.go` |
+| ARCHIVES | `.zip`, `.rar`, `.7z` |
+| OTHERS | Unknown or unsupported extensions |
+
+---
+
+## Example
+
+### Before
 
 ```text
 Downloads/
 ├── photo.jpg
 ├── resume.pdf
 ├── song.mp3
-├── movie.mp4
-├── notes.txt
-└── program.java
+├── Main.java
+├── archive.zip
+└── Work/
+    └── report.pdf
 ```
 
-After organization:
+### After
 
 ```text
 Downloads/
-├── Images/
+├── IMAGES/
 │   └── photo.jpg
-├── Documents/
+├── DOCUMENTS/
 │   ├── resume.pdf
-│   └── notes.txt
-├── Audio/
+│   └── report.pdf
+├── AUDIO/
 │   └── song.mp3
-├── Videos/
-│   └── movie.mp4
-└── Code/
-    └── program.java
+├── CODE/
+│   └── Main.java
+├── ARCHIVES/
+│   └── archive.zip
+└── Work/
 ```
 
-## 📚 Concepts Practiced
-
-* `Path`
-* `Paths`
-* `Files`
-* Java NIO (`java.nio.file`)
-* File and directory validation
-* Directory traversal
-* `DirectoryStream`
-* `Files.list()`
-* `Files.walk()`
-* File extensions
-* `enum`
-* File categorization
-* Directory creation
-* Moving files
-* `Files.move()`
-* Exception handling
-* Handling duplicate filenames
-* Safe file operations
-* CLI input with `Scanner`
-* Basic layered/project structure
-
-## 🚧 Development Phases
-
-### Phase 1 — Read a Folder
-
-* Accept folder path from the user
-* Convert input into a `Path`
-* Check whether the path exists
-* Check whether it is a directory
-* Validate invalid paths
-
-### Phase 2 — List Files
-
-* Read files from the directory
-* Distinguish files from directories
-* Display filenames
-* Practice `DirectoryStream` and `Files.list()`
-
-### Phase 3 — Categorize Files
-
-Create categories based on file extensions.
-
-Example:
+Duplicate files are automatically renamed:
 
 ```text
-Images     → jpg, jpeg, png, gif
-Documents  → pdf, txt, doc, docx
-Audio      → mp3, wav
-Videos     → mp4, mkv, avi
-Code       → java, js, py, go
-Archives   → zip, rar, 7z
+photo.jpg
+photo_1.jpg
+photo_2.jpg
 ```
 
-### Phase 4 — Create Category Directories
+---
 
-Automatically create directories such as:
+## Menu
 
 ```text
-Images/
-Documents/
-Audio/
-Videos/
-Code/
-Archives/
+FILE ORGANIZER
+==============
+
+1. Check Folder
+2. List Files
+3. Create Category Directories
+4. Organize Files
+9. Exit
 ```
 
-### Phase 5 — Move Files
+---
 
-Move each file into its appropriate category directory.
-
-The application should safely handle:
-
-* Existing destination files
-* Duplicate filenames
-* Unsupported file types
-* File system errors
-
-### Phase 6 — Recursive File Organization
-
-Extend the application to work with nested directories using:
+## Project Structure
 
 ```text
-Files.walk()
+04-file-organizer/
+├── src/
+│   ├── Main.java
+│   ├── FileConsole.java
+│   ├── FileOrganizer.java
+│   ├── FileCategory.java
+│   └── DirectoryStatus.java
+├── README.md
+└── .gitignore
 ```
 
-Consider how to prevent the organizer from accidentally processing the directories it creates itself.
+---
 
-### Phase 7 — Safety & Error Handling
+## Concepts Practiced
 
-Add robust handling for:
+### Java Core
 
-* Invalid paths
-* Missing directories
-* Permission errors
-* Duplicate files
-* Unsupported extensions
-* Files that cannot be moved
+- Classes
+- Methods
+- Enums
+- Collections
+- Exception Handling
 
-Introduce a **dry-run / safe mode** that shows what would happen without actually moving files.
+### Java Collections
 
-### Phase 8 — Refactoring
+- `ArrayList`
+- `HashMap`
+- `Map`
 
-Refactor the application into clean Java classes and responsibilities.
+### Java NIO
 
-Possible structure:
+- `Path`
+- `Paths`
+- `Files.exists()`
+- `Files.isDirectory()`
+- `DirectoryStream`
+- `Files.walk()`
+- `Files.createDirectories()`
+- `Files.move()`
+- `Path.resolve()`
 
-```text
-FileOrganizer
-├── FileScanner
-├── FileCategorizer
-├── FileMover
-└── FileCategory
-```
+### Streams
 
-The final structure will be decided during development rather than creating unnecessary abstractions upfront.
+- `Stream<Path>`
+- `filter()`
+- Method references (`Files::isRegularFile`)
 
-## 🛠️ Technologies
+### Software Design
 
-* Java
-* Java NIO
-* `java.util.Scanner`
-* Git
-* GitHub
+- Layered architecture
+- Service layer
+- CLI separation
+- Recursive file processing
+- Idempotent operations
+- Duplicate file handling
 
-## ▶️ Running the Project
+---
 
-Clone the repository:
+## What I Learned
 
-```bash
-git clone <repository-url>
-```
+This project helped me understand how Java interacts with the operating system through the NIO API.
 
-Navigate into the project:
+Key takeaways include:
 
-```bash
-cd 04-file-organizer
-```
+- Working with `Path` instead of raw strings.
+- Traversing directories recursively using `Files.walk()`.
+- Organizing files safely without overwriting existing files.
+- Using enums instead of magic numbers for clearer code.
+- Separating user interaction from business logic.
 
-Compile and run the application using your preferred Java development environment.
+---
 
-## 🧪 Example Usage
+## Next Project
 
-```text
-===== File Organizer =====
+➡️ **Project 05 — URL Checker**
 
-Enter folder path:
-C:\Users\User\Downloads
+The next project focuses on Java networking and HTTP using `HttpClient`, covering:
 
-Folder exists: true
-Is directory: true
-```
-
-Later versions will provide functionality such as:
-
-```text
-===== File Organizer =====
-
-Enter folder path:
-C:\Users\User\Downloads
-
-Found 24 files.
-
-Organizing files...
-
-photo.jpg      → Images/
-resume.pdf     → Documents/
-song.mp3       → Audio/
-movie.mp4      → Videos/
-program.java   → Code/
-
-Organization completed successfully.
-```
-
-## 🎓 Learning Objective
-
-This project is primarily a **learning project** focused on understanding Java's file-system APIs and applying them in a practical application.
-
-The implementation will be developed incrementally, with each phase introducing new Java concepts.
-
-## 📌 Project Status
-
-🚧 **In Progress**
-
-Current phase:
-
-```text
-Phase 1 — Read a Folder
-```
-
-## 🔮 Future Improvements
-
-Potential improvements after completing the core project:
-
-* Configuration file for custom categories
-* Custom extension mappings
-* Interactive organization preview
-* Undo/revert functionality
-* Logging
-* Command-line arguments
-* Recursive organization options
-* Improved duplicate-file strategies
-* Unit tests
-* Packaging as a standalone CLI application
+- HTTP requests
+- Status codes
+- Response time measurement
+- Error handling
+- Multiple URL checking
+- Network programming fundamentals

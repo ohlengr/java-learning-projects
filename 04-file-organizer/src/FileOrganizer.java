@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.*;
 import java.sql.Array;
 import java.util.*;
@@ -38,14 +37,14 @@ public class FileOrganizer {
         fileCategoryMap.put(".7z", FileCategory.ARCHIVES);
     }
 
-    public int isValidDirectory(String folderPath){
+    public DirectoryStatus isValidDirectory(String folderPath){
         Path path = Paths.get(folderPath);
         if(Files.exists(path) && Files.isDirectory(path)){
-            return 1;
+            return DirectoryStatus.VALID_DIRECTORY;
         }else if(Files.exists(path)){
-            return 2;
+            return DirectoryStatus.FILE_EXISTS;
         }else {
-            return 0;
+            return DirectoryStatus.NOT_FOUND;
         }
     }
 
@@ -90,8 +89,9 @@ public class FileOrganizer {
         }
     }
 
-    public void organizeFiles(Path folderPath){
+    public Map<FileCategory, Integer> organizeFiles(Path folderPath){
         List<Path> list = findFilesRecursively(folderPath);
+        Map<FileCategory, Integer> fileCategoryIntegerMap = new HashMap<>();
         for(Path path : list) {
             FileCategory fileCategory = getFileCategory(path.getFileName().toString());
             Path categoryPath = folderPath.resolve(fileCategory.toString());
@@ -99,13 +99,15 @@ public class FileOrganizer {
                 Files.createDirectories(categoryPath);
                 Path destinationPath = categoryPath.resolve(path.getFileName().toString());
                 Path uniqueDestinationPath = getUniqueDestination(destinationPath);
-                if(!uniqueDestinationPath.getParent().equals(categoryPath)){
+                if(!path.getParent().equals(categoryPath)){
                     Files.move(path, uniqueDestinationPath);
+                    fileCategoryIntegerMap.put(fileCategory, fileCategoryIntegerMap.getOrDefault(fileCategory, 0) + 1);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+        return fileCategoryIntegerMap;
     }
 
     public List<Path> findFilesRecursively(Path folderPath){
