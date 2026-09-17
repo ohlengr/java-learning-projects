@@ -1,0 +1,6 @@
+https://httpbin.org/status/404
+https://httpbin.org/status/500
+invalid-url
+
+https://googleee.com
+http://ohlengr.com
