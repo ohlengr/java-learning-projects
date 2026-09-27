@@ -1,5 +1,6 @@
 package com.ohlengr.restapi.service;
 
+import com.ohlengr.restapi.exception.BookNotFoundException;
 import com.ohlengr.restapi.model.Book;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,6 @@ public class BookService {
                 return book;
             }
         }
-        return null;
+        throw new BookNotFoundException("Book with id " + id + " not found");
     }
 }
