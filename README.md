@@ -17,8 +17,8 @@ This repository is also the foundation for developing the Java backend skills re
 | ✅      | **03 — Student Management**       | OOP, CRUD, `ArrayList`, layered architecture                               |
 | ✅      | **04 — File Organizer**           | Java NIO, Streams, recursive file handling                                 |
 | ✅      | **05 — URL Checker**              | URL validation, Java HTTP Client, file I/O, concurrency, response handling |
-| ⏳      | **06 — REST API**                 | Spring Boot, REST fundamentals                                             |
-| ⏳      | **07 — PostgreSQL CRUD API**      | Spring Boot, PostgreSQL, persistence                                       |
+| ✅      | **06 — REST API**                 | Spring Boot, REST, HTTP methods, JSON, DTOs, exception handling            |
+| ⏳      | **07 — PostgreSQL CRUD API**      | Spring Boot, PostgreSQL, JPA/Hibernate, persistence                        |
 | ⏳      | **08 — Concurrent Worker System** | Threads, `ExecutorService`, concurrency                                    |
 | ⏳      | **09 — Authentication API**       | Spring Security, JWT                                                       |
 | ⏳      | **10 — Mini SaaS Backend**        | Multi-tenant architecture                                                  |
@@ -117,35 +117,56 @@ Key concepts:
 
 **Status: Complete**
 
+### 06 — REST API
+
+A Spring Boot REST API built to understand the fundamentals of backend and RESTful application development before introducing persistence and authentication.
+
+Key concepts:
+
+* Spring Boot application structure
+* REST controllers
+* HTTP methods
+* Request mapping
+* Path variables
+* JSON request/response handling
+* DTOs
+* Service-layer architecture
+* Constructor-based dependency injection
+* `ResponseEntity`
+* HTTP status codes
+* Global exception handling
+* In-memory data management
+* Safe collection modification
+* Encapsulation
+* Basic Maven project lifecycle
+
+The project implements a complete in-memory Book API with:
+
+* `GET /api/books`
+* `GET /api/books/{id}`
+* `POST /api/books`
+* `PUT /api/books/{id}`
+* `DELETE /api/books/{id}`
+
+**Status: Complete**
+
 ---
 
 ## Upcoming Projects
 
-### 06 — REST API
-
-Introduction to Spring Boot and RESTful backend development.
-
-Planned focus:
-
-* Spring Boot
-* REST controllers
-* Request/response handling
-* Dependency injection
-* Application configuration
-* REST API design
-
 ### 07 — PostgreSQL CRUD API
 
-Extending the REST API with persistent data storage.
+The next project extends the REST API with persistent database storage.
 
 Planned focus:
 
 * PostgreSQL
 * Database design
-* JPA/Hibernate
+* JPA / Hibernate
 * Repository pattern
 * CRUD APIs
 * Persistence
+* Entity relationships
 
 ### 08 — Concurrent Worker System
 
@@ -214,15 +235,15 @@ Planned focus:
 * Java Streams
 * Java HTTP Client
 * Concurrency APIs
+* Spring Boot
+* Maven
 * Git
 
 ### Planned
 
-* Spring Boot
-* Spring Security
 * PostgreSQL
 * JPA / Hibernate
-* Maven
+* Spring Security
 * Docker
 * AWS
 
@@ -247,7 +268,7 @@ HTTP & Networking
     ↓
 Concurrency
     ↓
-Spring Boot
+Spring Boot & REST
     ↓
 Persistence
     ↓
@@ -264,10 +285,10 @@ The objective is to develop the ability to **understand problems, design solutio
 
 ## Progress
 
-**Completed: 5 / 11 projects**
+**Completed: 6 / 11 projects**
 
 ```text
-█████████░░░░░░░░░░░ 45%
+████████████░░░░░░░░ 55%
 ```
 
 The roadmap will evolve as each project is completed and reviewed.
@@ -279,4 +300,3 @@ The roadmap will evolve as each project is completed and reviewed.
 **Satnam Singh**
 
 Java Backend Development Learning Journey
-
