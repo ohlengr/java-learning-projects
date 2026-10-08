@@ -4,40 +4,37 @@ import java.util.concurrent.*;
 
 public class Application {
     public static void main(String[] args) {
+        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
+        Runnable task1 = () -> System.out.println("Task 1");
+        Runnable task2 = () -> System.out.println("Task 2");
+        Runnable task3 = () -> System.out.println("Task 3");
 
-        Callable<Integer> value = new Callable<Integer>() {
-            @Override
-            public Integer call() throws Exception {
-                Thread.sleep(3000);
-                System.out.println(Thread.currentThread().getName());
-                return 100;
-            }
-        };
-
-        Callable<Integer> value1 = ()-> {
-            Thread.sleep(1000);
-            System.out.println(Thread.currentThread().getName());
-            return 200;
-        };
-
-        Callable<Integer> value2 = ()->{
-            Thread.sleep(2000);
-            System.out.println(Thread.currentThread().getName());
-            return 300;
-        };
-
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
         try {
-            Future<Integer> future = executorService.submit(value);
-            Future<Integer> future1 = executorService.submit(value1);
-            Future<Integer> future2 = executorService.submit(value2);
-            System.out.println(future.get());
-            System.out.println(future1.get());
-            System.out.println(future2.get());
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+            queue.put(task1);
+            queue.put(task2);
+            queue.put(task3);
 
-        executorService.shutdown();
+            System.out.println("Queue Size : " + queue.size());
+
+            Thread worker = new Thread(()->{
+                for (int i = 0; i < 3; i++) {
+                    try {
+                        Runnable task = queue.take();
+                        task.run();
+                    } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            });
+
+            worker.start(); //start worker
+
+            worker.join(); //makes the main thread wait until this worker has finished all 3 tasks
+
+            System.out.println("Queue Size : " + queue.size());
+
+        }catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
