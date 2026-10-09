@@ -4,16 +4,20 @@ import java.util.concurrent.*;
 
 public class Application {
     public static void main(String[] args) throws InterruptedException {
-        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
+        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(2);
         Runnable task1 = ()-> System.out.println("Task 1");
         Runnable task2 = ()-> System.out.println("Task 2");
         Runnable task3 = ()-> System.out.println("Task 3");
 
+        queue.put(task1);
+        queue.put(task2);
+
+        System.out.println("Main trying to add Task 3");
+
         Thread worker = new Thread(() -> {
             try {
-                System.out.println("Worker waiting...");
+                Thread.sleep(2000);
                 Runnable task = queue.take();
-                System.out.println("Worker received task: " + task);
                 task.run();
             }catch (InterruptedException e) {
                 System.out.println(e.getMessage());
@@ -21,9 +25,8 @@ public class Application {
         });
         worker.start();
 
-        Thread.sleep(2000);
-        System.out.println(Thread.currentThread().getName() + " is adding task...");
-        queue.put(task1);
+        queue.put(task3);
+        System.out.println("Task 3 added");
 
         worker.join();
     }
