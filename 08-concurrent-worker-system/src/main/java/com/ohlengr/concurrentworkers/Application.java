@@ -8,15 +8,21 @@ public class Application {
         Runnable task1 = ()-> System.out.println("Task 1");
         Runnable task2 = ()-> System.out.println("Task 2");
         Runnable task3 = ()-> System.out.println("Task 3");
+        Runnable stop = () -> {};
 
         Thread worker = new Thread(() -> {
             try {
-                for (int i = 0; i < 3; i++) {
+                while (true) {
                     Runnable task = queue.take();
+                    if (task == stop) {
+                        System.out.println("Shutdown signal received. Worker stopping.");
+                        break;
+                    }
                     task.run();
+                    System.out.println("Queue size after processing task: " + queue.size());
                 }
             }catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Worker interrupted. Shutting down...");
             }
         });
         worker.start();
@@ -24,7 +30,10 @@ public class Application {
         queue.put(task1);
         queue.put(task2);
         queue.put(task3);
+        queue.put(stop);
 
         worker.join();
+
+        System.out.println("Main thread finished.");
     }
 }
