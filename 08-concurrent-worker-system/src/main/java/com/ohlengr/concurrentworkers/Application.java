@@ -10,7 +10,7 @@ public class Application {
         Runnable task3 = ()-> System.out.println("Task 3");
         Runnable stop = () -> {};
 
-        Thread worker = new Thread(() -> {
+        Runnable workerTask = () -> {
             try {
                 while (true) {
                     Runnable task = queue.take();
@@ -24,15 +24,28 @@ public class Application {
             }catch (InterruptedException e) {
                 System.out.println("Worker interrupted. Shutting down...");
             }
-        });
-        worker.start();
+        };
+
+        Thread worker1 = new Thread(workerTask);
+
+        Thread worker2 = new Thread(workerTask);
+
+        Thread worker3 = new Thread(workerTask);
+
+        worker1.start();
+        worker2.start();
+        worker3.start();
 
         queue.put(task1);
         queue.put(task2);
         queue.put(task3);
         queue.put(stop);
+        queue.put(stop);
+        queue.put(stop);
 
-        worker.join();
+        worker1.join();
+        worker2.join();
+        worker3.join();
 
         System.out.println("Main thread finished.");
     }
