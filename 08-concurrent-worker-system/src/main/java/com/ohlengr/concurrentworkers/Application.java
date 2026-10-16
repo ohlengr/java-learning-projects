@@ -9,6 +9,9 @@ public class Application {
         Runnable task2 = ()-> System.out.println("Task 2");
         Runnable task3 = ()-> System.out.println("Task 3");
         Runnable stop = () -> {};
+        Runnable task4 = () -> {
+            throw new RuntimeException("Task 4 failed!");
+        };
 
         Runnable workerTask = () -> {
             try {
@@ -18,8 +21,12 @@ public class Application {
                         System.out.println("Shutdown signal received. Worker stopping.");
                         break;
                     }
-                    task.run();
-                    System.out.println("Queue size after processing task: " + queue.size());
+                    try {
+                        task.run();
+                        System.out.println("Queue size after processing task: " + queue.size());
+                    }catch (RuntimeException e) {
+                        System.out.println("Queue task failed with error: " + e.getMessage());
+                    }
                 }
             }catch (InterruptedException e) {
                 System.out.println("Worker interrupted. Shutting down...");
@@ -39,6 +46,8 @@ public class Application {
         queue.put(task1);
         queue.put(task2);
         queue.put(task3);
+        queue.put(task4);
+
         queue.put(stop);
         queue.put(stop);
         queue.put(stop);
