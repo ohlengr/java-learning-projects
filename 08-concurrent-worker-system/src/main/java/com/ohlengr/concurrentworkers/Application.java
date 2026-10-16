@@ -1,17 +1,14 @@
 package com.ohlengr.concurrentworkers;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Application {
     public static void main(String[] args) throws InterruptedException {
+        TaskCounter taskCounter = new TaskCounter();
+        int numberOfTasks = 100_000;
         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
-        Runnable task1 = ()-> System.out.println("Task 1");
-        Runnable task2 = ()-> System.out.println("Task 2");
-        Runnable task3 = ()-> System.out.println("Task 3");
         Runnable stop = () -> {};
-        Runnable task4 = () -> {
-            throw new RuntimeException("Task 4 failed!");
-        };
 
         Runnable workerTask = () -> {
             try {
@@ -23,7 +20,7 @@ public class Application {
                     }
                     try {
                         task.run();
-                        System.out.println("Queue size after processing task: " + queue.size());
+                        taskCounter.completedTasks.incrementAndGet();
                     }catch (RuntimeException e) {
                         System.out.println("Queue task failed with error: " + e.getMessage());
                     }
@@ -43,10 +40,13 @@ public class Application {
         worker2.start();
         worker3.start();
 
-        queue.put(task1);
-        queue.put(task2);
-        queue.put(task3);
-        queue.put(task4);
+        for (int i = 0; i < numberOfTasks; i++) {
+            queue.put(() -> {
+                for (int j = 0; j < 100; j++) {
+                    Math.sqrt(j);
+                }
+            });
+        }
 
         queue.put(stop);
         queue.put(stop);
@@ -56,6 +56,13 @@ public class Application {
         worker2.join();
         worker3.join();
 
+        System.out.println("Expected: " + numberOfTasks);
+        System.out.println("Actual: " + taskCounter.completedTasks.get());
+
         System.out.println("Main thread finished.");
+    }
+
+    static class TaskCounter{
+        AtomicInteger completedTasks = new AtomicInteger(0);
     }
 }
