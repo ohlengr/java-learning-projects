@@ -1,11 +1,13 @@
 package com.ohlengr.concurrentworkers;
 
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Application {
     public static void main(String[] args) throws InterruptedException {
-        TaskCounter taskCounter = new TaskCounter();
+        ConcurrentHashMap<String, Integer> taskCounts = new ConcurrentHashMap<>();
+        taskCounts.put("completed", 0);
+        taskCounts.put("failed", 0);
         int numberOfTasks = 100_000;
         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
         Runnable stop = () -> {};
@@ -20,8 +22,9 @@ public class Application {
                     }
                     try {
                         task.run();
-                        taskCounter.completedTasks.incrementAndGet();
+                        taskCounts.merge("completed", 1, Integer::sum);
                     }catch (RuntimeException e) {
+                        taskCounts.merge("failed", 1, Integer::sum);
                         System.out.println("Queue task failed with error: " + e.getMessage());
                     }
                 }
@@ -48,6 +51,10 @@ public class Application {
             });
         }
 
+        queue.put(() -> {
+            throw new RuntimeException("Test task failure");
+        });
+
         queue.put(stop);
         queue.put(stop);
         queue.put(stop);
@@ -57,12 +64,9 @@ public class Application {
         worker3.join();
 
         System.out.println("Expected: " + numberOfTasks);
-        System.out.println("Actual: " + taskCounter.completedTasks.get());
+        System.out.println("Completed Tasks: " + taskCounts.get("completed"));
+        System.out.println("Failed Tasks: " + taskCounts.get("failed"));
 
         System.out.println("Main thread finished.");
-    }
-
-    static class TaskCounter{
-        AtomicInteger completedTasks = new AtomicInteger(0);
     }
 }
