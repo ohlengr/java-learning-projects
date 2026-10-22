@@ -6,26 +6,28 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Application {
     public static void main(String[] args) throws InterruptedException {
         ConcurrentHashMap<String, Integer> taskCounts = new ConcurrentHashMap<>();
+        ConcurrentHashMap<String, TaskResult> taskResults = new ConcurrentHashMap<>();
         taskCounts.put("completed", 0);
         taskCounts.put("failed", 0);
         int numberOfTasks = 100_000;
-        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(3);
-        Runnable stop = () -> {};
+        BlockingQueue<WorkerTask> queue = new ArrayBlockingQueue<>(3);
+        WorkerTask stop = new WorkerTask("STOP", () -> {});
 
         Runnable workerTask = () -> {
             try {
                 while (true) {
-                    Runnable task = queue.take();
-                    if (task == stop) {
+                    WorkerTask task = queue.take();
+                    if (task.taskId().equals("STOP")) {
                         System.out.println("Shutdown signal received. Worker stopping.");
                         break;
                     }
                     try {
-                        task.run();
+                        task.action().run();
                         taskCounts.merge("completed", 1, Integer::sum);
+                        taskResults.put(task.taskId(), new TaskResult(task.taskId(),"COMPLETED", null));
                     }catch (RuntimeException e) {
                         taskCounts.merge("failed", 1, Integer::sum);
-                        System.out.println("Queue task failed with error: " + e.getMessage());
+                        taskResults.put(task.taskId(), new TaskResult(task.taskId(),"FAILED", e.getMessage()));
                     }
                 }
             }catch (InterruptedException e) {
@@ -44,16 +46,18 @@ public class Application {
         worker3.start();
 
         for (int i = 0; i < numberOfTasks; i++) {
-            queue.put(() -> {
+            String taskId = "task-" + (i + 1);
+            queue.put(new  WorkerTask(taskId, () -> {
                 for (int j = 0; j < 100; j++) {
                     Math.sqrt(j);
                 }
-            });
+            }));
         }
 
-        queue.put(() -> {
+        String failureTaskId = "task-failure-1";
+        queue.put(new WorkerTask(failureTaskId, () -> {
             throw new RuntimeException("Test task failure");
-        });
+        }));
 
         queue.put(stop);
         queue.put(stop);
@@ -66,6 +70,15 @@ public class Application {
         System.out.println("Expected: " + numberOfTasks);
         System.out.println("Completed Tasks: " + taskCounts.get("completed"));
         System.out.println("Failed Tasks: " + taskCounts.get("failed"));
+
+        System.out.println("Stored results: " + taskResults.size());
+        System.out.println("Task 1 result: " + taskResults.get("task-1"));
+        System.out.println("Failure Task 1 result: " + taskResults.get(failureTaskId));
+
+        System.out.println(
+                "Counts match: " +
+                        (taskResults.size() == taskCounts.get("completed") + taskCounts.get("failed"))
+        );
 
         System.out.println("Main thread finished.");
     }
