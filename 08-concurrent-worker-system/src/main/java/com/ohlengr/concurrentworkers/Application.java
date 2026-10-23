@@ -31,6 +31,7 @@ public class Application {
                     }
                 }
             }catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 System.out.println("Worker interrupted. Shutting down...");
             }
         };
