@@ -13,38 +13,19 @@ public class Application {
         BlockingQueue<WorkerTask> queue = new ArrayBlockingQueue<>(3);
         WorkerTask stop = new WorkerTask("STOP", () -> {});
 
-        Runnable workerTask = () -> {
-            try {
-                while (true) {
-                    WorkerTask task = queue.take();
-                    if (task.taskId().equals("STOP")) {
-                        System.out.println("Shutdown signal received. Worker stopping.");
-                        break;
-                    }
-                    try {
-                        task.action().run();
-                        taskCounts.merge("completed", 1, Integer::sum);
-                        taskResults.put(task.taskId(), new TaskResult(task.taskId(),"COMPLETED", null));
-                    }catch (RuntimeException e) {
-                        taskCounts.merge("failed", 1, Integer::sum);
-                        taskResults.put(task.taskId(), new TaskResult(task.taskId(),"FAILED", e.getMessage()));
-                    }
-                }
-            }catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.out.println("Worker interrupted. Shutting down...");
-            }
-        };
+        Worker worker1 = new Worker(queue,taskCounts,taskResults);
+        Worker worker2 = new Worker(queue,taskCounts,taskResults);
+        Worker worker3 = new Worker(queue,taskCounts,taskResults);
 
-        Thread worker1 = new Thread(workerTask);
+        Thread workerThread1 = new Thread(worker1);
 
-        Thread worker2 = new Thread(workerTask);
+        Thread workerThread2 = new Thread(worker2);
 
-        Thread worker3 = new Thread(workerTask);
+        Thread workerThread3 = new Thread(worker3);
 
-        worker1.start();
-        worker2.start();
-        worker3.start();
+        workerThread1.start();
+        workerThread2.start();
+        workerThread3.start();
 
         for (int i = 0; i < numberOfTasks; i++) {
             String taskId = "task-" + (i + 1);
@@ -64,9 +45,9 @@ public class Application {
         queue.put(stop);
         queue.put(stop);
 
-        worker1.join();
-        worker2.join();
-        worker3.join();
+        workerThread1.join();
+        workerThread2.join();
+        workerThread3.join();
 
         System.out.println("Expected: " + numberOfTasks);
         System.out.println("Completed Tasks: " + taskCounts.get("completed"));
