@@ -10,8 +10,8 @@ public class Application {
         taskCounts.put("completed", 0);
         taskCounts.put("failed", 0);
         int numberOfTasks = 100_000;
-        BlockingQueue<WorkerTask> queue = new ArrayBlockingQueue<>(3);
-        WorkerTask stop = new WorkerTask("STOP", () -> {});
+        BlockingQueue<QueueMessage> queue = new ArrayBlockingQueue<>(3);
+        ShutdownSignal stop = ShutdownSignal.INSTANCE;
 
         Worker worker1 = new Worker(queue,taskCounts,taskResults);
         Worker worker2 = new Worker(queue,taskCounts,taskResults);

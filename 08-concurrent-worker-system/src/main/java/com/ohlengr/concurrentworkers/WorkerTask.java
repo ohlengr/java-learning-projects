@@ -1,4 +1,4 @@
 package com.ohlengr.concurrentworkers;
 
-record WorkerTask(String taskId, Runnable action) {
+record WorkerTask(String taskId, Runnable action) implements QueueMessage {
 }
