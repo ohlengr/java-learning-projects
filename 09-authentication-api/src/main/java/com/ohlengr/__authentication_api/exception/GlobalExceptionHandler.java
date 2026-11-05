@@ -19,4 +19,9 @@ public class GlobalExceptionHandler {
             MethodArgumentNotValidException exception) {
         return ResponseEntity.badRequest().body("Validation failed");
     }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<String> handleInvalidCredentialsException(InvalidCredentialsException exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
 }

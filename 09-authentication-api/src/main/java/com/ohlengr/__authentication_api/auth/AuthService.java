@@ -1,6 +1,7 @@
 package com.ohlengr.__authentication_api.auth;
 
 import com.ohlengr.__authentication_api.exception.EmailAlreadyExistsException;
+import com.ohlengr.__authentication_api.exception.InvalidCredentialsException;
 import com.ohlengr.__authentication_api.user.User;
 import com.ohlengr.__authentication_api.user.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,5 +37,16 @@ public class AuthService {
         String password = passwordEncoder.encode(request.password());
         User user = new User(email, name, password);
         return userRepository.save(user);
+    }
+
+    public User login(LoginRequest loginRequest){
+        String email = normalizeEmail(loginRequest.email());
+        User user = userRepository.findByEmail(email).orElseThrow(
+                () -> new InvalidCredentialsException("Invalid Email or Password")
+        );
+        if(!passwordEncoder.matches(loginRequest.password(), user.getPassword())){
+            throw new InvalidCredentialsException("Invalid email or password");
+        }
+        return user;
     }
 }
