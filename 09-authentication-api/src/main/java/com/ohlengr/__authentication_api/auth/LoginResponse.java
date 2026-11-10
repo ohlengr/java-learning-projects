@@ -1,4 +1,4 @@
 package com.ohlengr.__authentication_api.auth;
 
-public record LoginResponse(Long id, String name, String email ) {
+public record LoginResponse(Long id, String name, String email, String token) {
 }

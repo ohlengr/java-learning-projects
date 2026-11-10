@@ -1,5 +1,13 @@
 package com.ohlengr.__authentication_api.config;
 
+import com.nimbusds.jose.Algorithm;
+import com.nimbusds.jose.JWSAlgorithm;
+import com.nimbusds.jose.jwk.JWK;
+import com.nimbusds.jose.jwk.JWKSet;
+import com.nimbusds.jose.jwk.KeyUse;
+import com.nimbusds.jose.jwk.OctetSequenceKey;
+import com.nimbusds.jose.jwk.gen.OctetSequenceKeyGenerator;
+import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,8 +36,17 @@ public class JwtConfig {
 
     @Bean
     public JwtEncoder jwtEncoder(){
-        ImmutableSecret<SecurityContext> immutableSecret = new ImmutableSecret<>(jwtSecretKey());
-        return new NimbusJwtEncoder(immutableSecret);
+        OctetSequenceKey jwk = new OctetSequenceKey.Builder(jwtSecretKey())
+                .keyUse(KeyUse.SIGNATURE)
+                .algorithm(JWSAlgorithm.HS256)
+                .keyID("aith-api-key")
+                .build();
+
+        JWKSet jwkSet = new JWKSet(jwk);
+
+        return new NimbusJwtEncoder(
+                new ImmutableJWKSet<SecurityContext>(jwkSet)
+        );
     }
 
     @Bean
