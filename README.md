@@ -2,9 +2,9 @@
 
 A project-based Java learning journey from **Core Java to Spring Boot**, built through progressively challenging projects.
 
-The goal is to learn practical software engineering concepts by building complete applications, with each project introducing new concepts and increasing in complexity.
+The goal is to develop practical software engineering skills by building complete applications, with each project introducing new concepts and increasing in complexity.
 
-This repository also builds the Java backend skills required for larger products such as **Vetigo** and **CodeIntel**.
+This repository focuses on learning Java, backend development, application architecture, databases, concurrency, and security through hands-on implementation.
 
 ---
 
@@ -20,9 +20,7 @@ This repository also builds the Java backend skills required for larger products
 | ✅ | **06 — REST API** | Spring Boot, REST, HTTP methods, JSON, DTOs, exception handling |
 | ✅ | **07 — PostgreSQL CRUD API** | PostgreSQL, JPA/Hibernate, Spring Data JPA, persistence |
 | ✅ | **08 — Concurrent Worker System** | Threads, `Runnable`, bounded queues, thread-safe data, worker lifecycle |
-| ⏳ | **09 — Authentication API** | Spring Security, authentication, authorization, JWT |
-| ⏳ | **10 — Mini SaaS Backend** | Multi-tenant architecture, authentication, PostgreSQL |
-| ⏳ | **11 — Codebase Scanner** | Code analysis, file processing, project structure analysis |
+| ✅ | **09 — Authentication API** | Spring Security, authentication, authorization, JWT |
 
 ---
 
@@ -38,9 +36,7 @@ java-learning-projects/
 ├── 06-rest-api/
 ├── 07-postgresql-crud-api/
 ├── 08-concurrent-worker-system/
-├── 09-authentication-api/
-├── 10-mini-saas-backend/
-└── 11-codebase-scanner/
+└── 09-authentication-api/
 ```
 
 Each project is maintained as an independent application with its own source code and README where appropriate.
@@ -253,55 +249,49 @@ The queue accepts both normal tasks and shutdown messages through a shared inter
 
 ---
 
-# Upcoming Projects
-
 ## 09 — Authentication API
 
-Build a protected REST API to learn how applications verify users and control access to resources.
+Built a RESTful authentication API using Spring Boot, Spring Security, PostgreSQL, and JWT.
 
-Planned focus:
+The project demonstrates how applications authenticate users and protect resources using stateless token-based authentication.
 
-- Spring Security
+Key concepts:
+
+- Spring Security configuration
 - Authentication and authorization
-- Password hashing
 - User registration and login
-- JWT-based authentication
+- Password hashing using BCrypt
+- Email normalization
+- Duplicate email handling
+- PostgreSQL user persistence
+- Spring Data JPA
+- JWT generation using Nimbus
+- HS256 token signing
+- JWT signature and expiration validation
+- Stateless authentication
 - Protected REST endpoints
-- Roles and permissions
-- Security testing
-- PostgreSQL integration
+- Global exception handling
+- HTTP security status codes
+- Integration testing with MockMvc
 
-## 10 — Mini SaaS Backend
+Implemented endpoints:
 
-Build a larger backend application combining the concepts learned throughout the roadmap.
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/protected`
 
-Planned focus:
+JWT access tokens expire after 15 minutes.
 
-- Multi-tenant architecture
-- Authentication and authorization
-- REST APIs
-- PostgreSQL
-- Database design
-- Service-layer architecture
-- Tenant isolation
-- Configuration management
-- Production-oriented backend structure
+**Verification:**
 
-## 11 — Codebase Scanner
+- Application context test passed
+- Missing JWT correctly returns `401 Unauthorized`
+- Invalid JWT correctly returns `401 Unauthorized`
+- Valid JWT successfully accesses the protected endpoint with `200 OK`
 
-Build an engineering-focused application for analyzing software repositories.
+**Status: Complete**
 
-Planned focus:
-
-- Code analysis
-- File-system processing
-- Large-scale file traversal
-- Project structure analysis
-- Source-code inspection
-- Architecture mapping
-- Documentation generation
-
-This project will also provide practical foundations for the larger **CodeIntel** product direction.
+---
 
 ---
 
@@ -317,17 +307,19 @@ This project will also provide practical foundations for the larger **CodeIntel*
 - Java Concurrency APIs
 - Spring Boot
 - Spring Web MVC
+- Spring Security
 - Spring Data JPA
 - Hibernate
 - PostgreSQL
+- JWT
 - Maven
 - Git
 - JUnit 5
+- Spring Boot Test
+- MockMvc
 
 ## Planned
 
-- Spring Security
-- JWT
 - Docker
 - AWS
 
@@ -356,11 +348,7 @@ Persistence & Databases
     ↓
 Concurrency & Worker Systems
     ↓
-Security
-    ↓
-Multi-Tenant Backend
-    ↓
-Large-Scale Code Analysis
+Spring Security & JWT
 ```
 
 The projects progressively move from individual programming concepts toward complete backend application architecture.
@@ -380,12 +368,28 @@ The objective is to develop the ability to:
 
 ---
 
+# Related Projects
+
+The following are independent software products developed in separate repositories. They are mentioned here for context only and are not part of this repository's nine-project learning roadmap:
+
+### Vetigo
+
+A SaaS platform for salon management, with a focus on backend architecture, tenant management, and business application functionality.
+
+### CodeIntel
+
+An open-source codebase intelligence platform focused on repository scanning, code analysis, and software architecture understanding.
+
+Both products have separate repositories and their own documentation. They are not part of the numbered Java learning projects in this repository.
+
+---
+
 # Progress
 
-**Completed: 8 / 11 projects — 73%**
+**Completed: 9 / 9 projects — 100%**
 
 ```text
-████████████████░░░░░ 73%
+████████████████████ 100%
 ```
 
 ### Completed
@@ -399,15 +403,9 @@ The objective is to develop the ability to:
 06  REST API                 ✅
 07  PostgreSQL CRUD API      ✅
 08  Concurrent Worker System ✅
+09  Authentication API       ✅
 ```
 
-### Remaining
-
-```text
-09  Authentication API       ⏳
-10  Mini SaaS Backend        ⏳
-11  Codebase Scanner         ⏳
-```
 
 The roadmap will evolve as each project is completed and reviewed.
 
